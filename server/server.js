@@ -8,6 +8,8 @@ const express = require("express"),
 // /mongo settings
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DATABASE);
+//db models
+const { User } = require("./models/user");
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -17,7 +19,7 @@ app.use(cookieParser());
 
 
 
-//Server
+//SERVER
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
