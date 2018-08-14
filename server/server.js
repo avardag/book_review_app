@@ -117,6 +117,27 @@ app.post("/api/login", (req, res)=>{
   })
 })
 
+//GET the reviewer
+app.get("/api/user", (req, res)=>{
+  // {{url}}/api/user/?id=5b722cf7e7125931bc163edd
+  let id = req.query.id;
+
+  User.findById(id, (err, doc)=>{
+    if (err) return res.status(400).send(err);
+    res.json({
+      name: doc.name,
+      lastname: doc.lastname
+    })
+  })
+})
+//GET reviewers
+app.get("/api/users", (req, res)=>{
+  User.find({}, (err, users)=>{
+    if (err) return res.status(400).send(err);
+    res.status(200).json(users)
+  })
+})
+
 
 //SERVER
 const port = process.env.PORT || 3001;
