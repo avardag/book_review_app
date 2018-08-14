@@ -150,7 +150,10 @@ app.get("/api/user_reviews", (req, res)=>{
 
 //logout 
 app.get("/api/logout", auth, (req, res)=>{
-  res.send(req.user);
+  req.user.deleteToken(req.token, (err, user)=>{
+    if (err) return res.status(400).send(err);
+    res.sendStatus(200);
+  })
 })
 
 //SERVER
