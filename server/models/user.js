@@ -70,6 +70,18 @@ userSchema.methods.generateToken = function(cb){
     cb(null, user)
   })
 }
+//middleware to find id by token
+userSchema.statics.findByToken = function(tokenFromBrowser, cb){
+  var user = this;
+
+  jwt.verify(tokenFromBrowser, config.SECRET, function(err, decodedId){
+    user.findOne({"_id": decodedId, "token": tokenFromBrowser}, function(err, user){
+      if(err) return cb(err);
+      cb(null, user);
+    })
+  })
+}
+
 
 const User = mongoose.model("User", userSchema);
 

@@ -11,6 +11,8 @@ mongoose.connect(config.DATABASE);
 //db models
 const { User } = require("./models/user");
 const { Book } = require("./models/book");
+//middleware
+const { auth } = require('./middleware/auth');
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -144,6 +146,11 @@ app.get("/api/user_reviews", (req, res)=>{
     if (err) return res.status(400).send(err);
     res.send(docs)
   })
+})
+
+//logout 
+app.get("/api/logout", auth, (req, res)=>{
+  res.send(req.user);
 })
 
 //SERVER
