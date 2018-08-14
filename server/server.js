@@ -59,6 +59,41 @@ app.post("/api/book", (req, res) => {
     });
   });
 });
+//UPDATE
+app.put("/api/book", (req, res)=>{
+  Book.findByIdAndUpdate(req.body._id, req.body, {new: true}, (err, doc)=>{
+    if (err) return res.status(400).send(err);
+    res.json({
+      success: true,
+      doc: doc
+    })
+  })
+})
+
+// DELETE
+app.delete("/api/book", (req, res)=>{
+  // /api/book/?id
+  let id = req.query.id;
+  Book.findByIdAndRemove(id, (err, doc)=>{
+    if (err) return res.status(400).send(err);
+    res.json(true)
+  })
+})
+
+// USER ROUTES ///
+//POST
+app.post("/api/register", (req, res)=>{
+  const user = new User(req.body);
+
+  user.save((err, doc)=>{
+    if (err) return res.json({success:false});
+    res.status(200).json({
+      success: true,
+      user: doc
+    })
+  })
+})
+
 
 //SERVER
 const port = process.env.PORT || 3001;
