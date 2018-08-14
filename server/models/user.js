@@ -52,7 +52,24 @@ userSchema.pre("save", function(next){
     next()
   }
 })
+//method to compare passwords
+userSchema.methods.comparePassword = function(candidatePassword, cb){
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatchBoolean){
+    if(err) return cb(err);
+    cb(null, isMatchBoolean); // null == err
+  })
+}
+//method to generate jwt token
+userSchema.methods.generateToken = function(cb){
+  var user = this;
+  var newToken = jwt.sign(user._id.toHexString(), config.SECRET);
 
+  user.token = newToken;
+  user.save(function(err, user){
+    if(err) return cb(err);
+    cb(null, user)
+  })
+}
 
 const User = mongoose.model("User", userSchema);
 

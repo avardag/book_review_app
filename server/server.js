@@ -94,6 +94,29 @@ app.post("/api/register", (req, res)=>{
   })
 })
 
+//login
+app.post("/api/login", (req, res)=>{
+  
+  User.findOne({'email': req.body.email}, (err, foundUser)=>{
+    if(!foundUser) return res.json({isAuth: false, message: "Auth failed, email not found"});
+
+    foundUser.comparePassword(req.body.password, (err, isMatch)=>{
+      if(!isMatch) return res.json({
+        isAuth: false,
+        message: 'Wrong password'
+      })
+      foundUser.generateToken((err, user)=>{
+        if(err) return res.status(400).send(err);
+        res.cookie("auth", user.token).json({
+          isAuth: true,
+          id: user._id,
+          email: user.email
+        })
+      })
+    })
+  })
+})
+
 
 //SERVER
 const port = process.env.PORT || 3001;
