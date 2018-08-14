@@ -138,6 +138,13 @@ app.get("/api/users", (req, res)=>{
   })
 })
 
+//GET users reviews
+app.get("/api/user_reviews", (req, res)=>{
+  Book.find({reviewerId: req.query.user}).exec((err, docs)=>{
+    if (err) return res.status(400).send(err);
+    res.send(docs)
+  })
+})
 
 //SERVER
 const port = process.env.PORT || 3001;
