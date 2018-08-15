@@ -2,9 +2,11 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   cookieParser = require("cookie-parser"),
   mongoose = require("mongoose"),
+  cors = require("cors"),
   config = require("../config/config").get(process.env.NODE_ENV),
   app = express();
-
+  
+app.use(cors());
 // /mongo settings
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DATABASE);
@@ -28,7 +30,7 @@ app.use(cookieParser());
 //   })
 // })
 app.get("/api/book", (req, res)=>{
-  // localhost:3001/api/book/?id=5b720f575056d522f20fbe2a
+  // localhost:3001/api/book?id=5b720f575056d522f20fbe2a
   let id = req.query.id;
 
   Book.findById(id, (err, doc)=>{
