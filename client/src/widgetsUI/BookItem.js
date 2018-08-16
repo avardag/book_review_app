@@ -10,7 +10,7 @@ function BookItem(props) {
       <div className="book_items">
         <div className="book_author">{props.author}</div>
         <div className="book_bubble">
-          <strong>Price</strong> $ {props.price}
+          <strong>Price</strong> ${props.price}
         </div>
         <div className="book_bubble">
           <strong>Pages</strong>  {props.pages}

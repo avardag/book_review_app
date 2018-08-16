@@ -8,7 +8,7 @@ import BookItem from '../widgetsUI/BookItem';
 class HomeContainer extends Component {
   
   componentDidMount() {
-    this.props.dispatch(getBooks(4, 0, "desc"))
+    this.props.dispatch(getBooks(2, 0, "desc"))
   }
   
   renderItems = (books) =>(
@@ -19,11 +19,22 @@ class HomeContainer extends Component {
     : null
   )
 
+  loadMore = ()=>{
+    // number of books in a list.
+    // to be passed into getBooks() 'start'/'skip' argument
+    let count = this.props.books.list.length;
+    //need the 4th arg of existing list of books, to get appended after triggering loadMore()
+    let existingList = this.props.books.list;
+    this.props.dispatch(getBooks(2, count, 'desc', existingList))
+  }
   render() {
     
     return (
       <div>
         {this.renderItems(this.props.books)}
+        <div className="loadmore" onClick={this.loadMore}>
+          Load More
+        </div>
       </div>
     )
   }
