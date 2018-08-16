@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { getBooks } from '../actions/index';
 
+import BookItem from '../widgetsUI/BookItem';
+
 class HomeContainer extends Component {
   
   componentDidMount() {
@@ -12,7 +14,7 @@ class HomeContainer extends Component {
   renderItems = (books) =>(
     books.list ?
       books.list.map((item)=>(
-        'item'
+        <BookItem {...item} key={item._id}/>
       ))
     : null
   )
