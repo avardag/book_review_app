@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import {getBookWithReviewer} from "../../actions"
+import {getBookWithReviewer, clearBookWithReviewer} from "../../actions"
 
 class BookView extends Component {
 
@@ -9,7 +9,11 @@ class BookView extends Component {
     let bookId = this.props.match.params.id;
     this.props.dispatch(getBookWithReviewer(bookId))
   }
-  
+
+  componentWillUnmount(){
+    this.props.dispatch(clearBookWithReviewer())
+  }
+  //render template for sigle fetched book from props(redux state)
   renderBook = (books) => (
     books.book ? 
       <div className="br_container">
