@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Layout from './hocs/Layout';
 import Home from './components/home/Home';
 import BookView from './components/book/BookView';
+import Login from './containers/admin/Login';
 
 
 function Routes() {
@@ -11,6 +12,7 @@ function Routes() {
     <Layout>
       <Switch>
       <Route path='/' component={Home} exact/>
+      <Route path='/login' component={Login} exact/>
       <Route path='/books/:id' component={BookView} exact/>
       
       </Switch>

@@ -1,7 +1,9 @@
 export default function(state = {}, action) {
   switch (action.type) {
-    case "ACTION_TYPE":
-      return;
+    case "USER_LOGIN":
+      return {
+        ...state, user: action.payload
+      };
     default:
       return state;
   }

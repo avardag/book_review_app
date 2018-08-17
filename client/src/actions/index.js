@@ -55,3 +55,12 @@ export function clearBookWithReviewer() {
     }
   }
 }
+
+/* USER */
+
+export function userLogin() {
+  return{
+    type: "USER_LOGIN",
+    payload: null
+  }
+}
