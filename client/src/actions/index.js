@@ -16,3 +16,33 @@ export function getBooks(limit=10, start=0, order="asc", existingList='') {
     payload: request
   }
 }
+//Chainig two action creators and uing redux-thunk
+export function getBookWithReviewer(id){
+  
+  const request = axios.get(`http://localhost:3001/api/book?id=${id}`)
+
+  return (dispatch)=>{
+    request.then((response)=>{
+      let book = response.data
+      dispatch(getAuthor(book)) //dispatching another action to get user ID
+    })
+  }
+}
+function getAuthor(book){
+  
+  const request = axios.get(`/api/user?id=${book.reviewerId}`)
+  return (dispatch) =>{
+    request.then((res)=>{
+      let reviewer = res.data;
+      let bookWithReviewer = {
+        book,
+        reviewer
+      }
+      dispatch({
+          type:'GET_BOOK_W_REVIEWER',
+          payload: bookWithReviewer
+      })
+  })
+  }
+}
+
