@@ -20,10 +20,18 @@ class Login extends Component {
   submitForm = e => {
     e.preventDefault();
 
-    this.props.dispatch(userLogin(this.state))
+    this.props.dispatch(userLogin(this.state));
   };
+  //redirect user after successful login & recieving loginInfo thru dispatch
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.loginInfo.isAuth) {
+      this.props.history.push("/user");
+    }
+  }
 
   render() {
+    let user = this.props.user;
+
     return (
       <div className="rl_container">
         <form onSubmit={this.submitForm}>
@@ -50,14 +58,19 @@ class Login extends Component {
           </div>
 
           <button type="submit">Log in</button>
+          <div className="error">
+            {user.loginInfo ? <div>{user.loginInfo.message}</div> : null}
+          </div>
         </form>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
-});
+const mapStateToProps = state => {
+  return {
+    user: state.users
+  };
+};
 
 export default connect(mapStateToProps)(Login);
