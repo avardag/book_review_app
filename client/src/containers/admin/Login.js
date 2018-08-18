@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { loginUser } from "../../actions";
+import { userLogin } from "../../actions";
 
 class Login extends Component {
   state = {
@@ -18,7 +18,9 @@ class Login extends Component {
   };
 
   submitForm = e => {
-    e.preventDeafult();
+    e.preventDefault();
+
+    this.props.dispatch(userLogin(this.state))
   };
 
   render() {

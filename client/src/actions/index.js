@@ -58,9 +58,13 @@ export function clearBookWithReviewer() {
 
 /* USER */
 
-export function userLogin() {
+export function userLogin({email, password}) { //destrrng the args(state obj)
+  
+  const request = axios.post("/api/login", {email, password})
+                    .then(res => res.data)
+  
   return{
     type: "USER_LOGIN",
-    payload: null
+    payload: request
   }
 }
