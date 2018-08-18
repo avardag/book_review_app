@@ -5,13 +5,14 @@ import Layout from './hocs/Layout';
 import Home from './components/home/Home';
 import BookView from './components/book/BookView';
 import Login from './containers/admin/Login';
+import Auth from './hocs/Auth'; //AuthenticationCheck hoc, is fn
 
 
 function Routes() {
   return (
     <Layout>
       <Switch>
-      <Route path='/' component={Home} exact/>
+      <Route path='/' component={Auth(Home)} exact/>
       <Route path='/login' component={Login} exact/>
       <Route path='/books/:id' component={BookView} exact/>
       
