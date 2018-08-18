@@ -26,7 +26,7 @@ export default function(ComposedClass) {
         return <div className="loader">Loading ...</div>;
       }
       return (
-        <ComposedClass {...this.props} user="" />
+        <ComposedClass {...this.props} />
       ); /* {...this.props} props from R-Router */
     }
   }
