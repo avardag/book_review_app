@@ -68,3 +68,14 @@ export function userLogin({email, password}) { //destrrng the args(state obj)
     payload: request
   }
 }
+export function authCheck() { //destrrng the args(state obj)
+  
+  const request = axios.get("/api/auth")
+                    .then(res => res.data)
+  
+  return{
+    type: "USER_AUTH_CHECK",
+    payload: request
+  }
+}
+

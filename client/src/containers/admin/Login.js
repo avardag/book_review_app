@@ -24,7 +24,7 @@ class Login extends Component {
   };
   //redirect user after successful login & recieving loginInfo thru dispatch
   componentWillReceiveProps(nextProps) {
-    if (nextProps.user.loginInfo.isAuth) {
+    if (nextProps.user.loginData.isAuth) {
       this.props.history.push("/user");
     }
   }
