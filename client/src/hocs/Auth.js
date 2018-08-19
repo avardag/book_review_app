@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { authCheck } from "../actions";
 // import component from "../components/component";
 
-export default function(ComposedClass) {
+export default function(ComposedClass, authNeeded) {
   class AuthenticationCheck extends Component {
     state = {
       loading: true
@@ -18,6 +18,16 @@ export default function(ComposedClass) {
 
     componentWillReceiveProps(nextProps) {
       this.setState({ loading: false });
+      //check if isAuth and redirect to particular route
+      if (!nextProps.user.userAuthData.isAuth) {//from Redux state passed to props
+        if (authNeeded) {
+          this.props.history.push("/login")
+        }
+      } else {
+        if(authNeeded === false){
+          this.props.history.push("/user")
+        }
+      }
     }
 
     //will render Route componnt w/ some props if authenticated
