@@ -145,6 +145,17 @@ header .navItem span {
     font-weight: 300;
     width: 260px;
 }
+.rl_container textarea {
+    background: #f7f7f7;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    width: 260px;
+    height: 260px;
+    padding: 11px 31px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    font-size: 16px;
+}
 .rl_container.article input {
     width: 80%;
 }
@@ -159,6 +170,7 @@ header .navItem span {
     margin-top: 20px;
     font-size: 14px;
 }
+
 .rl_container.article select {
     width: 80%;
     background: #f7f7f7;
