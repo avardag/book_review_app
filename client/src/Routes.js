@@ -11,6 +11,7 @@ import Auth from './hocs/Auth'; //AuthenticationCheck hoc, is fn
 import User from './components/admin/Admin';
 import AddBook from './containers/admin/AddBook';
 import UserReviews from './components/admin/UserReviews';
+import EditBook from './containers/admin/EditBook';
 
 
 function Routes() {
@@ -21,6 +22,7 @@ function Routes() {
       <Route path='/login' component={Auth(Login, false)} exact/>
       <Route path='/user' component={Auth(User, true)} exact/>
       <Route path='/user/add' component={Auth(AddBook, true)} exact/>
+      <Route path='/user/edit-post/:id' component={Auth(EditBook, true)} exact/>
       <Route path='/user/user-reviews' component={Auth(UserReviews, true)} exact/>
       <Route path='/books/:id' component={Auth(BookView, null)} exact/>
       

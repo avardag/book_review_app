@@ -9,18 +9,12 @@ class UserReviews extends Component {
   componentDidMount() {
     this.props.dispatch(getUserReviews(this.props.user.userAuthData.id))
   }
-  
-  
-  componentWillReceiveProps(nextProps) {
-    // this.props.user.userReviews
-    
-  }
-  
+
   showUserReviews = (user)=>(
     user.userReviews ?
       user.userReviews.map(item=>(
         <tr key={item._id}>
-          <td><Link to={`user/edit-post/${item._id}`}>
+          <td><Link to={`/user/edit-post/${item._id}`}>
                 {item.name}
               </Link>
           </td>
