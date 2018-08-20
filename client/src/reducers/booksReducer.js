@@ -4,6 +4,8 @@ export default function(state = {}, action) {
       return {...state, list: action.payload};
     case "GET_BOOK":
       return {...state, foundBook: action.payload};
+    case "UPDATE_BOOK":
+      return {...state, updatedBook: action.payload};
     case "GET_BOOK_W_REVIEWER":
       return {
         ...state,

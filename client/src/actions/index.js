@@ -107,6 +107,16 @@ export function getBook(id){
     payload: request
   }
 }
+export function updateBook(data){
+  const request = axios.put(`/api/book`, data)
+                  .then(res => res.data)
+  return {
+    type: "UPDATE_BOOK",
+    payload: request
+  }
+}
+
+
 
 /* USER */
 

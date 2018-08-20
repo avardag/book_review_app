@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import { getBook } from "../../actions";
+import { getBook, updateBook } from "../../actions";
 
 class EditBook extends PureComponent {
   state = {
@@ -24,7 +24,7 @@ class EditBook extends PureComponent {
     let {foundBook} = nextProps.books
     this.setState({
       formData: {
-        _id: foundBook.id,
+        _id: foundBook._id,
         name: foundBook.name,
         author: foundBook.author,
         review: foundBook.review,
@@ -45,12 +45,15 @@ class EditBook extends PureComponent {
   submitForm = e => {
     e.preventDefault();
 
-    // this.props.dispatch(editBook())
+    this.props.dispatch(updateBook(this.state.formData))
+    //this.props.books.updatedBook.success <- success boolean
+    //this.props.books.updatedBook.doc <- updated book
 
   };
   
   
   render() {
+    console.log(this.props)
     return (
       <div className="rl_container">
         <form onSubmit={this.submitForm}>
