@@ -91,7 +91,12 @@ export function addBook(book) {
   }
 }
 
-
+export function clearNewBook() {
+  return {
+    type: "CLEAR_NEW_BOOK",
+    payload: {}
+  }
+}
 
 
 /* USER */

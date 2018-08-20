@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import { addBook } from "../../actions";
+import { addBook, clearNewBook } from "../../actions";
 
 class AddBook extends Component {
   state = {
@@ -21,7 +21,6 @@ class AddBook extends Component {
     newFormData[name] = e.target.value;
     this.setState({ formData: newFormData });
   };
-
   
   submitForm = e => {
     e.preventDefault();
@@ -33,6 +32,21 @@ class AddBook extends Component {
 
   };
 
+  showNewBook = (book) =>{
+    if (book.post === true) {
+      return (
+        <div className="conf_link">
+        New book added! <Link to={`/books/${book.bookId}`} >Click to see new book</Link>
+      </div>
+      )
+    }
+  }
+
+  
+  componentWillUnmount() {
+    this.props.dispatch(clearNewBook())
+  }
+  
   render() {
     return (
       <div className="rl_container">
@@ -96,6 +110,12 @@ class AddBook extends Component {
           </div>
 
           <button type="submit">Add review</button>
+
+          {
+            this.props.books.newBook ?
+            this.showNewBook(this.props.books.newBook)
+            :null
+          }
         </form>
       </div>
     );
