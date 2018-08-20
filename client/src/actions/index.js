@@ -56,6 +56,44 @@ export function clearBookWithReviewer() {
   }
 }
 
+// export function addBook(book){
+//   console.log("book obj fr action bf post", book)
+//   const request = axios.post('/api/book',book)
+//       .then(response => {
+//         console.log("response. fr axios", response)
+//         return response.data
+//       });
+
+//   return {
+//       type:'ADD_BOOK',
+//       payload:request
+//   }
+// }
+
+//full of errors CHECK LATER
+export function addBook(book) {
+  return function(dispatch) {
+    axios.post('/api/book', book)
+      .then((response) => { //doesnt get to here. 
+        return dispatch({
+          type:'ADD_BOOK',
+          payload:response.data
+      });
+      })
+      .catch((error) => {
+        if(error.response.data) { // CRAZY & STUPID FIX !!!
+          return dispatch({ 
+            type:'ADD_BOOK',
+            payload:error.response.data
+        });
+        }
+      });
+  }
+}
+
+
+
+
 /* USER */
 
 export function userLogin({email, password}) { //destrrng the args(state obj)
@@ -78,4 +116,5 @@ export function authCheck() { //destrrng the args(state obj)
     payload: request
   }
 }
+
 
