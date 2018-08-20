@@ -8,6 +8,10 @@ export default function(state = {}, action) {
       return {
         ...state, userAuthData: action.payload
       };
+    case "GET_USER_REVIEWS":
+      return {
+        ...state, userReviews: action.payload
+      };
     default:
       return state;
   }

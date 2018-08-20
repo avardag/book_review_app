@@ -121,5 +121,15 @@ export function authCheck() { //destrrng the args(state obj)
     payload: request
   }
 }
+export function getUserReviews(userId) {
+  
+  const request = axios.get(`/api/user_reviews?user=${userId}`)
+                    .then(res => res.data)
+  
+  return{
+    type: "GET_USER_REVIEWS",
+    payload: request
+  }
+}
 
 
