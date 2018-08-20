@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-// import {  } from "../../actions";
+import { getBook } from "../../actions";
 
 class EditBook extends PureComponent {
   state = {
@@ -16,6 +16,25 @@ class EditBook extends PureComponent {
     }
   };
 
+  componentDidMount() {
+    this.props.dispatch(getBook(this.props.match.params.id))
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    let {foundBook} = nextProps.books
+    this.setState({
+      formData: {
+        _id: foundBook.id,
+        name: foundBook.name,
+        author: foundBook.author,
+        review: foundBook.review,
+        pages: foundBook.pages,
+        rating: foundBook.rating,
+        price: foundBook.price
+      }
+    })
+  }
+  
   handleInput = (e, name) => {
     const newFormData = { ...this.state.formData };
 

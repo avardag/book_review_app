@@ -97,7 +97,16 @@ export function clearNewBook() {
     payload: {}
   }
 }
-
+//edit actions
+export function getBook(id){
+  // localhost:3001/api/book?id=5b720f575056d522f20fbe2a
+  const request = axios.get(`/api/book?id=${id}`)
+                  .then(res => res.data)
+  return {
+    type: "GET_BOOK",
+    payload: request
+  }
+}
 
 /* USER */
 
