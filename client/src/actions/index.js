@@ -115,7 +115,25 @@ export function updateBook(data){
     payload: request
   }
 }
-
+export function deleteBook(id){
+  // delete method on  /api/book?id=948590860938-378
+  const request = axios.delete(`/api/book?id=${id}`)
+                  .then(res => res.data)
+  return {
+    type: "DELETE_BOOK",
+    payload: request
+  }
+}
+export function clearBookStateAfterDelete() {
+  return {
+    type: "CLEAR_BOOK",
+    payload: {
+      bookDeleted: false,
+      bookUpdate: false,
+      foundBook: null
+    }
+  }
+}
 
 
 /* USER */

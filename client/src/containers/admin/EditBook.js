@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import { getBook, updateBook } from "../../actions";
+import { getBook, updateBook, deleteBook, clearBookStateAfterDelete } from "../../actions";
 
 class EditBook extends PureComponent {
   state = {
@@ -35,6 +35,10 @@ class EditBook extends PureComponent {
     })
   }
   
+  componentWillUnmount() {
+    this.props.dispatch(clearBookStateAfterDelete())
+  }
+  
   handleInput = (e, name) => {
     const newFormData = { ...this.state.formData };
 
@@ -51,17 +55,35 @@ class EditBook extends PureComponent {
 
   };
   
+  deletePost = () =>{
+    const idToDelete = this.props.match.params.id
+    this.props.dispatch(deleteBook(idToDelete))
+  }
   
+  redirectUser = ()=>{
+    setTimeout(()=>{
+      this.props.history.push("/user/user-reviews")
+    }, 1500)
+  }
   render() {
     console.log(this.props)
     let {books} = this.props;
     return (
       <div className="rl_container article">
-
+          {/* update message */}
         {
           books.bookUpdate?
           <div className="edit_confirm">
             Post Updated, <Link to={`/books/${books.foundBook._id}`}>Click to see your post</Link>
+          </div>
+          :null
+        }
+          {/* delete message */}
+        {
+          books.bookDeleted?
+          <div className="red_tag">
+            Post Deleted
+            {this.redirectUser()}
           </div>
           :null
         }
@@ -127,7 +149,9 @@ class EditBook extends PureComponent {
 
           <button type="submit">Edit review</button>
           <div className="delete_post">
-            <div className="button">
+            <div className="button"
+                  onClick={this.deletePost}  
+                >
               Delete Review
             </div>
           </div>
