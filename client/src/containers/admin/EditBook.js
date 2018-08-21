@@ -54,8 +54,18 @@ class EditBook extends PureComponent {
   
   render() {
     console.log(this.props)
+    let {books} = this.props;
     return (
-      <div className="rl_container">
+      <div className="rl_container article">
+
+        {
+          books.bookUpdate?
+          <div className="edit_confirm">
+            Post Updated, <Link to={`/books/${books.foundBook._id}`}>Click to see your post</Link>
+          </div>
+          :null
+        }
+
         <form onSubmit={this.submitForm}>
           <h2>Edit Review</h2>
           <div className="form_element">

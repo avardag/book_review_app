@@ -5,7 +5,10 @@ export default function(state = {}, action) {
     case "GET_BOOK":
       return {...state, foundBook: action.payload};
     case "UPDATE_BOOK":
-      return {...state, updatedBook: action.payload};
+      return {...state, 
+                  bookUpdate: action.payload.success,
+                  foundBook: action.payload.doc
+                };
     case "GET_BOOK_W_REVIEWER":
       return {
         ...state,
