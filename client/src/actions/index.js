@@ -185,9 +185,11 @@ export function userRegister(newUserData, usersList) {
   
   return (dispatch) =>{
     request.then(({data})=>{
+      // if success add user , else return old list
+      let users = data.success ? [...usersList, data.user] : usersList;
       let response = {
         success: data.success,
-        users: [...usersList, data.user]
+        users
       }
 
       dispatch({

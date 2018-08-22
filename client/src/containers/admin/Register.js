@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { getUsers, userRegister } from '../../actions';
 
-class Register extends Component {
+class Register extends PureComponent {
   state = {
     name: "",
     lastname: "",
@@ -43,7 +43,22 @@ class Register extends Component {
     }
     this.props.dispatch(userRegister(newUserData, this.props.user.foundUsers))
   };
-
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.userRegistered === false) {
+      this.setState({
+        error: 'Error, Try again'
+      })
+    }else{//reset a form with empty values
+      this.setState({
+        name: "",
+        lastname: "",
+        email: "",
+        password: ""
+      })
+    }
+  }
+  
   render() {
     console.log(this.props)
     let user = this.props.user; //user obj from redux state
