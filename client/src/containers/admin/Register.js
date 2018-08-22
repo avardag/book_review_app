@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getUsers } from '../../actions';
+import { getUsers, userRegister } from '../../actions';
 
 class Register extends Component {
   state = {
@@ -28,13 +28,20 @@ class Register extends Component {
     )
 
   handleInput = e => {
-    // const newFormData = { ...this.state.formData };
-    // newFormData[name] = e.target.value;
-    // this.setState({ [name]: e.target.name });
+    
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   submitForm = e => {
     e.preventDefault();
+    this.setState({error: ''}) //clear left out error from state before submit
+    let newUserData = {
+      name: this.state.name,
+      lastname: this.state.lastname,
+      email: this.state.email,
+      password: this.state.password,
+    }
+    this.props.dispatch(userRegister(newUserData, this.props.user.foundUsers))
   };
 
   render() {
@@ -44,6 +51,50 @@ class Register extends Component {
       <div className="rl_container">
         <form onSubmit={this.submitForm}>
           <h2>Add user:</h2>
+          <div className="form_element">
+            <input 
+                type="text"
+                placeholder="Enter name"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleInput}
+                />
+          </div>
+          
+          <div className="form_element">
+            <input 
+                type="text"
+                placeholder="Enter Lastname"
+                name="lastname"
+                value={this.state.lastname}
+                onChange={this.handleInput}
+                /> 
+          </div>
+          <div className="form_element">
+            <input 
+                type="email"
+                placeholder="Enter Email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleInput}
+                />
+          </div>
+          <div className="form_element">
+            <input 
+                type="password"
+                placeholder="Enter Email"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleInput}
+                />
+          </div>
+
+          <button type="submit">Add User</button>
+          <div className="error">{this.state.error}</div>
+        </form>
+
+        <div className="current_users">
+          <h4>Current Users:</h4>
           <table>
             <thead>
               <tr>
@@ -56,7 +107,7 @@ class Register extends Component {
               {this.showUsers(user)}
             </tbody>
           </table>
-        </form>
+        </div>
       </div>
     );
   }

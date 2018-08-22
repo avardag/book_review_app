@@ -16,6 +16,12 @@ export default function(state = {}, action) {
       return {
         ...state, foundUsers: action.payload
       };
+    case "USER_REGISTER":
+      return {
+        ...state,
+         userRegistered: action.payload.success,
+         foundUsers: action.payload.users
+      };
     default:
       return state;
   }
