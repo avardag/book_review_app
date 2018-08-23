@@ -24,13 +24,8 @@ class Login extends Component {
   };
   //redirect user after successful login & recieving loginInfo thru dispatch
   componentWillReceiveProps(nextProps) {
-    if (nextProps.user.loginData) { // was crushing app bc logndata was undefined
-      if (nextProps.user.loginData.isAuth) {
-        this.props.history.push("/user");
-      }
-      
-    }else{
-      this.props.history.push("/login");
+    if (nextProps.user.userAuthData.isAuth) {
+      this.props.history.push("/user");
     }
   }
 

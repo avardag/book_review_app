@@ -2,7 +2,7 @@ export default function(state = {}, action) {
   switch (action.type) {
     case "USER_LOGIN":
       return {
-        ...state, loginData: action.payload
+        ...state, userAuthData: action.payload
       };
     case "USER_AUTH_CHECK":
       return {

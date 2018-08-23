@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import FontAwesome from "react-fontawesome";
+import { connect } from "react-redux";
 
-const SidenavItems = () => {
+
+const SidenavItems = ({user}) => { //destrng from redux store
   const items = [
     {
       type: "navItem",
@@ -69,11 +71,31 @@ const SidenavItems = () => {
 
   return (
     <div>
-      {items.map((item, i) => {
-        return element(item, i);
-      })}
+      {user.userAuthData?
+        items.map((item, i) => {
+          //if authenticated show all menu items
+          if (user.userAuthData.isAuth) {
+            //excluding Login (already logined? hide login)
+            return !item.exclude?
+              element(item, i)
+            :null //return null during iteration on excluded route
+          } else {
+            //else if not authenticated show only notrestricted routes
+            return !item.restricted ?
+              element(item, i)
+            :null //return null on restricted routes during iteration
+          }
+        })
+      :null
+    }
     </div>
   );
 };
 
-export default SidenavItems;
+const mapStateToProps = (state) => {
+  return {
+    user: state.users
+  }
+}
+
+export default connect(mapStateToProps)(SidenavItems);
