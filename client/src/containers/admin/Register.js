@@ -60,7 +60,6 @@ class Register extends PureComponent {
   }
   
   render() {
-    console.log(this.props)
     let user = this.props.user; //user obj from redux state
     return (
       <div className="rl_container">

@@ -13,7 +13,7 @@ import AddBook from './containers/admin/AddBook';
 import UserReviews from './components/admin/UserReviews';
 import EditBook from './containers/admin/EditBook';
 import Register from './containers/admin/Register';
-
+import Logout from './components/admin/Logout';
 
 
 function Routes() {
@@ -25,6 +25,7 @@ function Routes() {
       <Route path='/user' component={Auth(User, true)} exact/>
       <Route path='/user/add' component={Auth(AddBook, true)} exact/>
       <Route path='/user/register' component={Auth(Register, true)} exact/>
+      <Route path='/user/logout' component={Auth(Logout, true)} exact/>
       <Route path='/user/edit-post/:id' component={Auth(EditBook, true)} exact/>
       <Route path='/user/user-reviews' component={Auth(UserReviews, true)} exact/>
       <Route path='/books/:id' component={Auth(BookView, null)} exact/>
